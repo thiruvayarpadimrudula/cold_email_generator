@@ -61,6 +61,8 @@ cold_email_fresh/
 
 
 ---
+
+
 <img width="985" height="274" alt="cold_email drawio" src="https://github.com/user-attachments/assets/f4540fd8-2938-4b51-9cfb-baf6856d236e" />
 
 ## Technologies Used
@@ -77,11 +79,9 @@ cold_email_fresh/
 ## Installation
 
 1. **Clone the repository**
-
-```bash
-git clone https://github.com/<your-username>/cold_email_fresh.git
-cd cold_email_fresh
-
+    git clone https://github.com/<your-username>/cold_email_fresh.git
+    cd cold_email_fresh
+   
 2. **Create a virtual environment**
 
 python -m venv venv
@@ -90,16 +90,12 @@ venv\Scripts\activate     # Windows
 
 
 Install dependencies
-
 pip install -r requirements.txt
 
 
 Set up environment variables
-
 Create a .env file in the project root with your Groq API key:
-
 GROQ_API_KEY=your_groq_api_key
-
 
 ⚠️ Alternatively, use Streamlit secrets to store your key:
 
@@ -108,14 +104,10 @@ GROQ_API_KEY=your_groq_api_key
 api_key="your_groq_api_key"
 
 Usage
-
 Run the Streamlit app
-
 streamlit run app/main.py
 
-
 Open the app in your browser
-
 Default URL: http://localhost:8501
 
 Generate cold emails
@@ -137,9 +129,9 @@ Environment Variables
 GROQ_API_KEY – API key for Groq LLM (required)
 
 Important: Do not commit .env files or API keys to public repositories.
+---
 
-**Acknowledgments
+## Acknowledgments
 
-**Inspired by CodeBasics YouTube tutorial
-**
-**Customizations and improvements for dynamic user input, multi-role emails, and portfolio integration by Mrudula**
+Inspired by CodeBasics YouTube tutorial
+Customizations and improvements for dynamic user input, multi-role emails, and portfolio integration by Mrudula**
