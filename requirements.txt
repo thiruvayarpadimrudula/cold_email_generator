@@ -1,0 +1,8 @@
+streamlit>=1.26.0
+pandas
+python-dotenv
+langchain-groq
+langchain-core
+langchain-community
+chromadb
+groq-client   # if required by your ChatGroq usage
