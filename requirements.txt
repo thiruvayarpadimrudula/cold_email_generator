@@ -1,4 +1,4 @@
-# Corrected content
+# requirements.txt
 streamlit>=1.26.0
 pandas
 python-dotenv
@@ -6,4 +6,5 @@ langchain-groq
 langchain-core
 langchain-community
 chromadb
-groq  # <-- Use 'groq', not 'groq-client'
+groq
+beautifulsoup4  # <--- ADD THIS LINE
