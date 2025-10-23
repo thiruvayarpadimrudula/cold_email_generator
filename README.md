@@ -1,7 +1,7 @@
 # Cold Email Generator
 
 An AI-powered cold email generator web application built with **Streamlit** and **LLM-based AI**. Unlike static, hard-coded solutions, this app allows users to input URLs or job links and generates personalized cold emails for multiple roles dynamically.
-
+This project is inspired by the CodeBasics tutorial, with additional features like dynamic inputs, multi-role email generation, and portfolio integration added by Mrudula.
 ---
 <img width="1919" height="867" alt="Screenshot 2025-10-23 165747" src="https://github.com/user-attachments/assets/19694a2e-0686-44cb-af4d-3e8412616cbd" />
 <img width="1919" height="879" alt="Screenshot 2025-10-23 165756" src="https://github.com/user-attachments/assets/56ef6447-401a-48d2-87e8-4a4f05ae2e43" />
