@@ -133,5 +133,6 @@ Important: Do not commit .env files or API keys to public repositories.
 
 ## Acknowledgments
 
-Inspired by CodeBasics YouTube tutorial
-Customizations and improvements for dynamic user input, multi-role emails, and portfolio integration by Mrudula**
+Inspired by CodeBasics YouTube tutorial: https://www.youtube.com/c/codebasics
+
+Customizations and improvements for dynamic user input, multi-role emails, and portfolio integration by Mrudula.
