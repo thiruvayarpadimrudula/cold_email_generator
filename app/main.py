@@ -5,6 +5,7 @@ from chains import Chain
 from portfolio import Portfolio
 from utils import clean_text
 import os
+import time
 
 # ---------------------------
 # UI constants
@@ -118,8 +119,9 @@ def create_streamlit_app(llm, portfolio):
 
     # Sender customization
     sender_name = st.text_input("Sender name:", value="Mrudula")
-    company_name = st.text_input("Company name:", value="Artgen_z")
-    sender_title = st.text_input("Sender title / role (optional):", value="BDE")
+
+
+    
 
     st.markdown("### Email style options")
 
@@ -159,7 +161,8 @@ def create_streamlit_app(llm, portfolio):
             loader = WebBaseLoader([url_input])
             page_content = loader.load().pop().page_content
             clean_data = clean_text(page_content)
-
+            clean_data = clean_data[:16000]
+            start_time = time.perf_counter()
             # 2️⃣ Ensure portfolio is loaded (if not loaded yet, load default CSV)
             portfolio.load_portfolio()
 
@@ -180,8 +183,7 @@ def create_streamlit_app(llm, portfolio):
                     job,
                     links,
                     sender_name=sender_name,
-                    company_name=company_name,
-                    sender_title=sender_title,
+                    
                     tone=tone,
                     length=length,
                     email_type=email_type
@@ -202,7 +204,11 @@ def create_streamlit_app(llm, portfolio):
                     file_name=f"cold_email_job_{idx+1}.txt",
                     mime="text/plain"
                 )
+            end_time = time.perf_counter()
 
+            total_time = end_time - start_time
+
+            print(f"Generation time: {total_time:.2f} seconds")
         except Exception as e:
             st.error(f"An error occurred: {e}")
 
@@ -210,5 +216,7 @@ def create_streamlit_app(llm, portfolio):
 if __name__ == "__main__":
     st.set_page_config(layout="wide", page_title="Cold Email Generator", page_icon="📧")
     chain = Chain()
-    portfolio = Portfolio()
+    if "portfolio" not in st.session_state:
+        st.session_state.portfolio = Portfolio()
+    portfolio = st.session_state.portfolio
     create_streamlit_app(chain, portfolio)

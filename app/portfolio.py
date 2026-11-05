@@ -53,24 +53,47 @@ class Portfolio:
                 )
 
     def query_links(self, skills):
-        """
-        skills: list or string
-        returns a list of dicts like [{'links': 'https://...'}, ...]
-        """
         if isinstance(skills, str):
-            skills = [skills]
-        try:
-            results = self.collection.query(query_texts=skills, n_results=2).get('metadatas', [[]])
-        except Exception:
-            # In case collection or query fails, return empty list
+                skills = [skills]
+        
+        skills = [
+            skill.strip()
+            for skill in skills
+            if isinstance(skill, str) and skill.strip()
+        ]
+        
+        if not skills or self.collection.count() == 0:
             return []
+        
+        try:
+            results = self.collection.query(
+                query_texts=skills,
+                n_results=2
+            )
+        
+            metadatas = results.get("metadatas", [])
+            documents = results.get("documents", [])
+        except Exception as e:
+            print(f"Portfolio search failed: {e}")
+            return []
+        
+        top_projects = []
+        seen_links = set()
+        
+        for metadata_group, document_group in zip(metadatas, documents):
+            for metadata, techstack in zip(metadata_group, document_group):
+                link = metadata.get("links", "") if metadata else ""
+        
+                if not link or link in seen_links:
+                    continue
+        
+                seen_links.add(link)
+        
+                top_projects.append({
+                    "techstack": techstack or "",
+                    "links": link
+                })
+        
+        return top_projects
 
-        # Flatten results to [{'links': ...}, ...]
-        top_links = []
-        for sublist in results:
-            for r in sublist:
-                if isinstance(r, dict) and 'links' in r:
-                    top_links.append({'links': r['links']})
-                elif isinstance(r, str):
-                    top_links.append({'links': r})
-        return top_links
+    
