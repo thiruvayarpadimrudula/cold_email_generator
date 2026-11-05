@@ -1,136 +1,225 @@
-# Cold Email Generator
+# AI-Powered Cold Email Generator
 
-An AI-powered cold email generator web application built with **Streamlit** and **LLM-based AI**. Unlike static, hard-coded solutions, this app allows users to input URLs or job links and generates personalized cold emails for multiple roles dynamically. This project is inspired by the CodeBasics tutorial, with additional features like dynamic inputs, multi-role email generation, and portfolio integration added by Mrudula.---
-<img width="1919" height="867" alt="Screenshot 2025-10-23 165747" src="https://github.com/user-attachments/assets/19694a2e-0686-44cb-af4d-3e8412616cbd" />
-<img width="1919" height="879" alt="Screenshot 2025-10-23 165756" src="https://github.com/user-attachments/assets/56ef6447-401a-48d2-87e8-4a4f05ae2e43" />
-<img width="1910" height="630" alt="Screenshot 2025-10-23 165809" src="https://github.com/user-attachments/assets/4bfc1f33-02ae-483b-8dff-e7ecf3713d71" />
+An intelligent cold email generation application built using **Python, Streamlit, LangChain, Groq LLM, and ChromaDB**.
 
-## Table of Contents
+The application automates the process of creating personalized professional emails by analyzing job postings, extracting relevant skills, and matching them with portfolio entries using semantic search.
 
-- [Project Overview](#project-overview)  
-- [Features](#features)  
-- [Project Structure](#project-structure)  
-- [Technologies Used](#technologies-used)  
-- [Installation](#installation)  
-- [Usage](#usage)  
-- [Environment Variables](#environment-variables)  
-- [Acknowledgments](#acknowledgments)  
-- [License](#license)  
+Users can customize sender information, company details, email type, tone, and length to generate tailored emails for different job opportunities. Generated emails can also be downloaded as `.txt` files.
 
 ---
 
 ## Project Overview
 
-This project enables job seekers, freelancers, and professionals to generate professional cold emails automatically. Users provide a job URL or portfolio CSV, and the app uses an LLM model (Groq) to extract job postings, match skills with portfolio items, and generate tailored cold emails.
+Writing personalized cold emails for different job opportunities can be time-consuming. Manually analyzing job descriptions, identifying relevant skills, selecting portfolio projects, and drafting emails requires considerable effort.
 
-This implementation improves upon standard tutorials by supporting dynamic input, multi-user usage, and custom email tones, lengths, and types.
+This project simplifies that process through an AI-powered workflow.
+
+The application extracts job information from a provided URL, identifies relevant skills, retrieves matching portfolio links using ChromaDB, and passes the collected information to a Groq-powered LLM through LangChain to generate a customized email.
 
 ---
 
 ## Features
 
-- Generate personalized cold emails from any job or company URL.  
-- Support for user-uploaded portfolios in CSV format.  
-- Automatic extraction of job information from web pages.  
-- Options for email tone, length, and type.  
-- Download generated emails as `.txt` files.  
-- Clean, responsive **Streamlit** UI with branding/logo support.  
-- Integration with **ChromaDB** for semantic portfolio matching.  
+- **Automated Job Extraction:** Extracts relevant job information, including job title, required skills, experience, and job description from job posting URLs.
+- **Semantic Portfolio Matching:** Uses ChromaDB vector search to identify portfolio entries relevant to the skills extracted from job descriptions.
+- **AI-Powered Email Generation:** Integrates Groq LLM with LangChain to generate context-aware and personalized cold emails.
+- **Customizable Email Generation:** Supports dynamic sender details, company name, job role, email type, tone, and length.
+- **CSV Portfolio Upload:** Allows users to upload their own portfolio data using a CSV file containing `Techstack` and `Links` columns.
+- **Interactive Streamlit Interface:** Provides an interface for entering job URLs and customizing email preferences.
+- **Email Export:** Allows users to download generated emails as `.txt` files.
+- **Performance Benchmarking:** Includes a benchmarking script to evaluate the execution time of the email generation workflow.
+
+---
+
+## Application Workflow
+
+The application follows a retrieval-augmented generation (RAG)-style workflow, where relevant portfolio information is retrieved before generating the final email.
+
+```mermaid
+flowchart TD
+    A[Job Posting URL] --> B[Job Extraction]
+    B --> C[Groq LLM + LangChain]
+    C --> D[Extracted Job Details]
+    D --> E[Extracted Skills]
+    E --> F[ChromaDB Vector Search]
+    F --> G[Relevant Portfolio Links]
+    G --> H[User Customization Inputs]
+    H --> I[Groq LLM + LangChain]
+    I --> J[Personalized Cold Email]
+    J --> K[TXT Download]
+```
+
+### Workflow Explanation
+
+1. **Job URL Input:** The user provides a job posting or company URL.
+2. **Job Information Extraction:** The application processes the URL and extracts relevant job details using the LLM-based extraction chain.
+3. **Skill Identification:** Required technical skills are identified from the extracted job information.
+4. **Portfolio Retrieval:** ChromaDB performs semantic similarity search to retrieve portfolio links associated with relevant technical skills.
+5. **User Customization:** The user provides sender details, company name, email type, tone, and desired email length.
+6. **Email Generation:** LangChain constructs the prompt and invokes the Groq-hosted LLM to generate a personalized email.
+7. **Email Export:** The generated email is displayed in the Streamlit interface and can be downloaded as a `.txt` file.
+
+---
+
+## Technology Stack
+
+| Technology | Purpose |
+|---|---|
+| Python | Core application development |
+| Streamlit | Interactive web interface |
+| Groq | LLM inference |
+| LangChain | Prompt engineering and LLM orchestration |
+| ChromaDB | Vector database and semantic portfolio retrieval |
+| Pandas | CSV processing and portfolio data handling |
+| Python-dotenv | Environment variable management |
 
 ---
 
 ## Project Structure
 
-cold_email_fresh/
+```text
+cold_email_generator/
 │
-├── .streamlit/ # Streamlit configuration
 ├── app/
-│ ├── main.py # Streamlit app entry point
-│ ├── chains.py # LLM logic for extracting jobs & generating emails
-│ ├── portfolio.py # Portfolio handling and vector store logic
-│ ├── utils/ # Helper functions (text cleaning, etc.)
-├── requirements.txt # Python dependencies
-├── vectorstore/ # ChromaDB persistent vector storage
-├── .env # Environment variables (API keys)
-├── .gitignore
-├── logo/ # App logo (logo.jpg)
-├── my_portfolio.csv # Default sample portfolio
-
-
-
----
-
-
-<img width="985" height="274" alt="cold_email drawio" src="https://github.com/user-attachments/assets/f4540fd8-2938-4b51-9cfb-baf6856d236e" />
-
-## Technologies Used
-
-- **Python 3.13**  
-- **Streamlit** – Interactive web interface  
-- **LangChain / Groq LLM** – AI-based email generation  
-- **ChromaDB** – Vector database for portfolio matching  
-- **Pandas** – CSV handling  
-- **dotenv** – Environment variable management  
+│   ├── main.py                 # Streamlit application entry point
+│   ├── chains.py               # Job extraction and email generation logic
+│   ├── portfolio.py            # Portfolio management and ChromaDB operations
+│   ├── benchmark.py            # Performance benchmarking
+│   │
+│   └── resource/
+│       └── my_portfolio.csv    # Default portfolio dataset
+│
+├── .streamlit/
+│   └── config.toml             # Streamlit configuration (if configured)
+│
+├── requirements.txt            # Project dependencies
+├── .gitignore                  # Git ignored files
+├── README.md                   # Project documentation
+└── vectorstore/                # Persistent ChromaDB storage (generated at runtime)
+```
 
 ---
 
-## Installation
+## Installation and Setup
 
-1. **Clone the repository**
-    git clone https://github.com/<your-username>/cold_email_fresh.git
-    cd cold_email_fresh
-   
-2. **Create a virtual environment**
+### 1. Clone the Repository
 
+```bash
+git clone https://github.com/thiruvayarpadimrudula/cold_email_generator.git
+
+cd cold_email_generator
+```
+
+### 2. Create a Virtual Environment
+
+```bash
 python -m venv venv
-source venv/bin/activate  # Linux/Mac
-venv\Scripts\activate     # Windows
+```
 
+Activate the environment.
 
-Install dependencies
+**Windows:**
+
+```bash
+venv\Scripts\activate
+```
+
+**Linux / macOS:**
+
+```bash
+source venv/bin/activate
+```
+
+### 3. Install Dependencies
+
+```bash
 pip install -r requirements.txt
+```
 
+### 4. Configure Environment Variables
 
-Set up environment variables
-Create a .env file in the project root with your Groq API key:
+Obtain a Groq API key from the [Groq Console](https://console.groq.com/).
+
+Create a `.env` file in the project root:
+
+```env
 GROQ_API_KEY=your_groq_api_key
+```
 
-⚠️ Alternatively, use Streamlit secrets to store your key:
+Make sure `.env` is included in `.gitignore` and is never committed to GitHub.
 
-# .streamlit/secrets.toml
-[GROQ]
-api_key="your_groq_api_key"
+For deployment, configure the API key through your hosting platform's secrets settings using the format expected by the application.
 
-Usage
-Run the Streamlit app
+### 5. Run the Application
+
+```bash
 streamlit run app/main.py
+```
 
-Open the app in your browser
-Default URL: http://localhost:8501
+The application will be available at:
 
-Generate cold emails
+```text
+http://localhost:8501
+```
 
-Enter a job URL.
+---
 
-Optionally upload your portfolio CSV (columns: Techstack, Links).
+## Usage
 
-Choose email tone, length, and type.
+1. Open the application in your browser.
+2. Enter a job posting URL.
+3. Optionally upload a portfolio CSV file.
+4. Configure your sender name, company name, and role.
+5. Select the email type, preferred tone, and desired length.
+6. Generate a personalized cold email.
+7. Review the generated email.
+8. Download the email as a `.txt` file.
 
-Enter your sender name, title, and company name.
+### Portfolio CSV Format
 
-Click Submit to generate emails.
+Users can upload a CSV file containing the following columns:
 
-Preview emails in the app and download as .txt files.
+| Techstack | Links |
+|---|---|
+| React, Node.js, MongoDB | https://example.com/react-portfolio |
+| Python, Django, MySQL | https://example.com/python-portfolio |
+| Machine Learning, Python, TensorFlow | https://example.com/ml-portfolio |
 
-Environment Variables
+The `Techstack` column contains the technologies associated with a portfolio entry, while the `Links` column stores its corresponding URL.
 
-GROQ_API_KEY – API key for Groq LLM (required)
+---
 
-Important: Do not commit .env files or API keys to public repositories.
+## Performance Benchmarking
+
+The project includes a benchmarking script to evaluate the execution time of the email generation workflow.
+
+The workflow can be measured across three stages:
+
+- Job information extraction.
+- Portfolio retrieval using ChromaDB.
+- Email generation using the Groq LLM.
+
+Python's `time.perf_counter()` is used to measure execution time.
+
+The benchmark helps identify performance bottlenecks and provides a basis for evaluating optimization opportunities.
+
+---
+
+## Future Enhancements
+
+- Support for multiple LLM providers.
+- Improved portfolio matching using richer project descriptions and metadata.
+- Email generation history and saved drafts.
+- Additional email templates and customization options.
+- Enhanced error handling and URL validation.
+- Performance optimization for larger portfolio datasets.
+
 ---
 
 ## Acknowledgments
 
-Inspired by CodeBasics YouTube tutorial: https://www.youtube.com/c/codebasics
+This project was initially inspired by the [CodeBasics YouTube tutorial](https://www.youtube.com/c/codebasics).
 
-Customizations and improvements for dynamic user input, multi-role emails, and portfolio integration by Mrudula.
+Further development and customizations include dynamic user inputs, Groq LLM integration, semantic portfolio matching with ChromaDB, customizable email generation, and email export functionality.
+
+**Developed by Mrudula.**
