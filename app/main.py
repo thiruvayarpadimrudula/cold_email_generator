@@ -85,138 +85,377 @@ input, select, textarea {{
 </style>
 """
 
-
 def render_header():
     # Inject CSS
     st.markdown(STYLE, unsafe_allow_html=True)
 
     # Header with logo and title
     col1, col2 = st.columns([1, 8])
+
     with col1:
-        # try show logo; if not found, skip gracefully
         if os.path.exists(LOGO_PATH):
             st.image(LOGO_PATH, width=120)
         else:
-            # small placeholder space so layout keeps
-            st.markdown("<div style='height:72px;'></div>", unsafe_allow_html=True)
+            st.markdown(
+                "<div style='height:72px;'></div>",
+                unsafe_allow_html=True
+            )
+
     with col2:
         st.markdown(
             "<div class='app-title card'><h1>📧 Cold Email Generator</h1></div>",
             unsafe_allow_html=True
         )
+
     st.markdown("---")
+
 
 def create_streamlit_app(llm, portfolio):
     render_header()
 
-    # wrap controls in a card
+    # ---------------------------
+    # Input section
+    # ---------------------------
     st.markdown("<div class='card'>", unsafe_allow_html=True)
 
-    url_input = st.text_input(
-        "Enter a URL:",
-        value="https://www.google.com/about/careers/applications/jobs/results/93158356268524230-customer-solutions-engineer-data-analytics-google-cloud"
+    input_method = st.radio(
+        "Choose job description input method:",
+        ["Job URL", "Paste Job Description"]
     )
 
-    # Sender customization
-    sender_name = st.text_input("Sender name:", value="Mrudula")
+    url_input = ""
+    job_description_input = ""
 
+    if input_method == "Job URL":
+        url_input = st.text_input("Enter Job URL:")
+    else:
+        job_description_input = st.text_area(
+            "Paste the complete Job Description:",
+            height=300,
+            placeholder="Paste the job responsibilities, qualifications and required skills here..."
+        )
 
-    
+    sender_name = st.text_input(
+        "Sender name:",
+        value="Mrudula"
+    )
 
+    # ---------------------------
+    # Email customization
+    # ---------------------------
     st.markdown("### Email style options")
 
-    # New controls: tone, length, email type
-    tone = st.selectbox("Email tone", ["Formal", "Friendly", "Persuasive", "Neutral"], index=0)
-    length = st.selectbox("Email length", ["Short", "Medium", "Detailed"], index=1)
-    email_type = st.selectbox("Email type", ["Job Application", "Collaboration", "Partnership / Pitch", "Introductory"], index=0)
+    tone = st.selectbox(
+        "Email tone",
+        ["Formal", "Friendly", "Persuasive", "Neutral"],
+        index=0
+    )
+
+    length = st.selectbox(
+        "Email length",
+        ["Short", "Medium", "Detailed"],
+        index=1
+    )
+
+    email_type = st.selectbox(
+        "Email type",
+        [
+            "Job Application",
+            "Collaboration",
+            "Partnership / Pitch",
+            "Introductory"
+        ],
+        index=0
+    )
 
     st.markdown("---")
-    st.subheader("Portfolio (CSV)")
-    st.write("Upload a CSV with columns `Techstack` and `Links` (Links can be GitHub/website).")
-    uploaded_file = st.file_uploader("Upload portfolio CSV (optional)", type=["csv"])
 
-    # preview and load uploaded csv into portfolio when provided
+    # ---------------------------
+    # Portfolio upload
+    # ---------------------------
+    st.subheader("Portfolio (CSV)")
+
+    st.write(
+        "Upload a CSV with columns `Techstack` and `Links` "
+        "(Links can be GitHub/website)."
+    )
+
+    uploaded_file = st.file_uploader(
+        "Upload portfolio CSV (optional)",
+        type=["csv"]
+    )
+
     if uploaded_file is not None:
         try:
             uploaded_df = pd.read_csv(uploaded_file)
+
             st.write("Preview of uploaded portfolio:")
             st.dataframe(uploaded_df.head(10))
+
             if st.button("Use uploaded portfolio"):
                 portfolio.load_portfolio(uploaded_df)
-                st.success("Uploaded portfolio loaded into vector store.")
+
+                st.success(
+                    "Uploaded portfolio loaded into vector store."
+                )
+
         except Exception as e:
             st.error(f"Failed to read uploaded CSV: {e}")
+    else:
+        portfolio_df = pd.read_csv("data/portfolio.csv")
+        portfolio.load_portfolio(portfolio_df) 
 
-    st.markdown("</div>", unsafe_allow_html=True)  # close card
+    st.markdown("</div>", unsafe_allow_html=True)
 
-    submit_button = st.button("Submit", key="submit_main")
+    # ---------------------------
+    # Submit
+    # ---------------------------
+    submit_button = st.button(
+        "Submit",
+        key="submit_main"
+    )
 
     if submit_button:
         try:
-            if not url_input.strip():
-                st.error("Please enter a valid URL.")
-                return
+            total_start = time.perf_counter()
 
-            # 1️⃣ Load and clean page data
-            loader = WebBaseLoader([url_input])
-            page_content = loader.load().pop().page_content
-            clean_data = clean_text(page_content)
+            # ---------------------------
+            # 1. Get job description
+            # ---------------------------
+            if input_method == "Job URL":
+
+                if not url_input.strip():
+                    st.error("Please enter a valid URL.")
+                    st.stop()
+
+                loader = WebBaseLoader([url_input])
+
+                page_content = loader.load().pop().page_content
+
+                clean_data = clean_text(page_content)
+
+            else:
+
+                if not job_description_input.strip():
+                    st.error("Please paste a job description.")
+                    st.stop()
+
+                clean_data = job_description_input.strip()
+
+            # Limit input length
             clean_data = clean_data[:16000]
-            start_time = time.perf_counter()
-            # 2️⃣ Ensure portfolio is loaded (if not loaded yet, load default CSV)
+
+            st.write(
+                "Job description characters:",
+                len(clean_data)
+            )
+
+            st.subheader("DEBUG: Scraped Job Description")
+
+            st.text_area(
+                "Cleaned text",
+                clean_data,
+                height=300
+            )
+
+            # ---------------------------
+            # 2. Ensure portfolio is loaded
+            # ---------------------------
+            portfolio_start = time.perf_counter()
+
             portfolio.load_portfolio()
 
-            # 3️⃣ Extract jobs from page
+            portfolio_load_time = (
+                time.perf_counter() - portfolio_start
+            )
+
+            # ---------------------------
+            # 3. Extract job details
+            # ---------------------------
+            extraction_start = time.perf_counter()
+
             jobs = llm.extract_jobs(clean_data)
 
-            # 4️⃣ Generate emails for each job
+            extraction_time = (
+                time.perf_counter() - extraction_start
+            )
+
+            if not jobs:
+                st.warning(
+                    "No job details could be extracted from the description."
+                )
+                st.stop()
+
+            # ---------------------------
+            # 4. Retrieve projects and generate emails
+            # ---------------------------
+            retrieval_times = []
+            email_times = []
+
             for idx, job in enumerate(jobs):
-                job_skills = job.get('skills', [])
+
+                job_skills = job.get("skills", [])
+
                 if isinstance(job_skills, str):
                     job_skills = [job_skills]
 
-                # Query portfolio links for this job
+                # Portfolio retrieval
+                retrieval_start = time.perf_counter()
+
                 links = portfolio.query_links(job_skills)
 
-                # Generate cold email using provided sender info and style options
+                retrieval_time = (
+                    time.perf_counter() - retrieval_start
+                )
+
+                retrieval_times.append(retrieval_time)
+
+                st.subheader("DEBUG: Extracted Job Details")
+                st.json(job)
+
+                st.subheader("DEBUG: Retrieved Portfolio Projects")
+                st.json(links)
+
+                # Generate email
+                email_start = time.perf_counter()
+
                 email = llm.write_mail(
                     job,
                     links,
                     sender_name=sender_name,
-                    
                     tone=tone,
                     length=length,
                     email_type=email_type
                 )
 
-                # Ensure escaped newlines are actual newlines
+                email_time = (
+                    time.perf_counter() - email_start
+                )
+
+                email_times.append(email_time)
+
+                # Convert escaped newlines
                 if isinstance(email, str):
                     email = email.replace("\\n", "\n")
 
-                st.markdown(f"### ✉️ Email #{idx + 1}: {job.get('role', 'Unknown Role')}")
-                # Show email in a text area with preserved formatting and ability to copy
-                st.text_area(f"Email preview — Job #{idx+1}", value=email.strip(), height=260)
+                # ---------------------------
+                # Email preview
+                # ---------------------------
+                st.markdown(
+                    f"### ✉️ Email #{idx + 1}: "
+                    f"{job.get('role', 'Unknown Role')}"
+                )
 
-                # Also provide a downloadable txt button for convenience
+                st.text_area(
+                    f"Email preview — Job #{idx + 1}",
+                    value=email.strip(),
+                    height=260,
+                    key=f"email_preview_{idx}"
+                )
+
+                # One-click TXT export
                 st.download_button(
                     label="Download email (.txt)",
                     data=email.strip(),
-                    file_name=f"cold_email_job_{idx+1}.txt",
-                    mime="text/plain"
+                    file_name=f"cold_email_job_{idx + 1}.txt",
+                    mime="text/plain",
+                    key=f"download_email_{idx}"
                 )
-            end_time = time.perf_counter()
 
-            total_time = end_time - start_time
+            # ---------------------------
+            # 5. Performance measurements
+            # ---------------------------
+            total_time = time.perf_counter() - total_start
 
-            print(f"Generation time: {total_time:.2f} seconds")
+            total_retrieval_time = sum(retrieval_times)
+            total_email_time = sum(email_times)
+
+            st.markdown("---")
+            st.subheader("Performance Report")
+
+            col1, col2 = st.columns(2)
+
+            with col1:
+                st.metric(
+                    "Portfolio loading",
+                    f"{portfolio_load_time:.3f} sec"
+                )
+
+                st.metric(
+                    "Job extraction",
+                    f"{extraction_time:.3f} sec"
+                )
+
+            with col2:
+                st.metric(
+                    "Portfolio retrieval",
+                    f"{total_retrieval_time:.3f} sec"
+                )
+
+                st.metric(
+                    "Email generation",
+                    f"{total_email_time:.3f} sec"
+                )
+
+            st.metric(
+                "Total processing time",
+                f"{total_time:.2f} seconds"
+            )
+
+            print("\n===== PERFORMANCE REPORT =====")
+            print(
+                f"Portfolio loading: {portfolio_load_time:.3f} sec"
+            )
+            print(
+                f"Job extraction: {extraction_time:.3f} sec"
+            )
+            print(
+                f"Portfolio retrieval: {total_retrieval_time:.3f} sec"
+            )
+            print(
+                f"Email generation: {total_email_time:.3f} sec"
+            )
+            print(
+                f"Total processing time: {total_time:.2f} sec"
+            )
+
+            # Show LRU cache statistics
+            if hasattr(portfolio, "_get_cached_embedding"):
+                st.subheader("Embedding Cache Statistics")
+
+                cache_info = portfolio.get_embedding_cache_info()
+
+                st.write({
+                    "Cache hits": cache_info.hits,
+                    "Cache misses": cache_info.misses,
+                    "Maximum capacity": cache_info.maxsize,
+                    "Current entries": cache_info.currsize
+                })
+
+                print("Embedding cache:", cache_info)
+
         except Exception as e:
             st.error(f"An error occurred: {e}")
+            print(f"Application error: {e}")
 
 
+# ---------------------------
+# Application entry point
+# ---------------------------
 if __name__ == "__main__":
-    st.set_page_config(layout="wide", page_title="Cold Email Generator", page_icon="📧")
+
+    st.set_page_config(
+        layout="wide",
+        page_title="Cold Email Generator",
+        page_icon="📧"
+    )
+
     chain = Chain()
+
     if "portfolio" not in st.session_state:
         st.session_state.portfolio = Portfolio()
+        st.session_state.portfolio.load_portfolio()
+
     portfolio = st.session_state.portfolio
+
     create_streamlit_app(chain, portfolio)

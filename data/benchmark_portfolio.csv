@@ -1,0 +1,96 @@
+﻿Title,Techstack,Links,Description
+AI Resume Analyzer,"Python, FastAPI, React, NLP, PostgreSQL",https://github.com/yourusername/ai-resume-analyzer,"Compares resumes with job descriptions, extracts skills, identifies gaps, and suggests improvements."
+E-Commerce Platform,"React, Node.js, Express, MongoDB, Stripe",https://github.com/yourusername/e-commerce-platform,"Supports product search, shopping carts, checkout, order tracking, and administration."
+Task Management Dashboard,"React, TypeScript, Node.js, PostgreSQL",https://github.com/yourusername/task-management-dashboard,"Manages projects, task assignments, deadlines, comments, and team progress."
+Real-Time Chat App,"React, Socket.IO, Node.js, MongoDB",https://github.com/yourusername/real-time-chat-app,"Provides direct and group messaging, online presence, typing indicators, and message history."
+Weather Forecast App,"JavaScript, HTML, CSS, OpenWeatherMap API",https://github.com/yourusername/weather-forecast-app,"Displays current conditions, forecasts, location-based weather, and alerts."
+Expense Tracker,"Python, Django, SQLite, Chart.js",https://github.com/yourusername/expense-tracker,"Records income and expenses, categorizes transactions, and visualizes monthly spending."
+Library Management System,"Java, Spring Boot, MySQL, Hibernate",https://github.com/yourusername/library-management-system,"Manages books, members, issue and return workflows, and overdue records."
+Food Delivery App,"Flutter, Dart, Firebase",https://github.com/yourusername/food-delivery-app,"Provides restaurant menus, cart management, order placement, and delivery updates."
+Fraud Detection Model,"Python, Pandas, Scikit-learn, XGBoost",https://github.com/yourusername/fraud-detection-model,Classifies potentially fraudulent transactions using engineered transaction features.
+Sales Analytics Dashboard,"Power BI, SQL, Excel",https://github.com/yourusername/sales-analytics-dashboard,"Visualizes revenue, regional performance, product trends, and business KPIs."
+Inventory Management API,"C#, ASP.NET Core, SQL Server, Entity Framework",https://github.com/yourusername/inventory-management-api,"Provides APIs for stock levels, suppliers, purchase orders, and inventory alerts."
+Personal Portfolio Website,"HTML, CSS, JavaScript, GSAP",https://github.com/yourusername/personal-portfolio-website,"Showcases projects, skills, experience, contact details, and responsive animations."
+Online Learning Platform,"Next.js, TypeScript, Node.js, PostgreSQL",https://github.com/yourusername/online-learning-platform,"Offers course catalogs, enrollment, lesson progress, quizzes, and instructor tools."
+Image Classification App,"Python, TensorFlow, Keras, Streamlit",https://github.com/yourusername/image-classification-app,Classifies uploaded images with a convolutional neural network and displays confidence.
+Customer Support Ticketing,"Vue.js, Node.js, Express, MongoDB",https://github.com/yourusername/customer-support-ticketing,"Tracks support requests, priorities, assignments, status changes, and customer messages."
+URL Shortener Service,"Go, Redis, PostgreSQL, Docker",https://github.com/yourusername/url-shortener-service,"Creates short links, redirects visitors, tracks clicks, and supports link expiration."
+Job Recommendation Engine,"Python, Scikit-learn, TF-IDF, Flask",https://github.com/yourusername/job-recommendation-engine,Ranks job listings against candidate skills using text similarity.
+Banking Management System,"Java, Spring Boot, MySQL, REST API",https://github.com/yourusername/banking-management-system,"Manages customer accounts, deposits, withdrawals, transfers, and transaction histories."
+Smart Parking System,"Python, OpenCV, Raspberry Pi, MQTT",https://github.com/yourusername/smart-parking-system,Detects parking-space occupancy and publishes availability updates.
+Fitness Tracking App,"Kotlin, Android, Room Database",https://github.com/yourusername/fitness-tracking-app,"Tracks workouts, exercise history, fitness goals, and daily activity summaries."
+Recipe Finder,"React, JavaScript, REST API, CSS",https://github.com/yourusername/recipe-finder,Searches recipes by ingredients and dietary preferences and displays instructions.
+Movie Recommendation System,"Python, Pandas, Scikit-learn, Flask",https://github.com/yourusername/movie-recommendation-system,Recommends films using content similarity and user ratings.
+Employee Attendance Portal,"Angular, Java, Spring Boot, MySQL",https://github.com/yourusername/employee-attendance-portal,"Records attendance, leave requests, monthly summaries, and manager approvals."
+Cloud File Storage,"Node.js, Express, AWS S3, PostgreSQL",https://github.com/yourusername/cloud-file-storage,"Uploads, stores, organizes, and retrieves user files with access controls."
+Blog Publishing Platform,"Ruby on Rails, PostgreSQL, Tailwind CSS",https://github.com/yourusername/blog-publishing-platform,"Supports author profiles, article drafting, publishing, tags, comments, and search."
+Network Intrusion Detection,"Python, Scapy, Scikit-learn",https://github.com/yourusername/network-intrusion-detection,Analyzes network traffic features and classifies suspicious activity.
+Event Booking Website,"React, Node.js, MongoDB, Razorpay",https://github.com/yourusername/event-booking-website,"Lists events, manages seat selection, processes bookings, and confirms tickets."
+Hospital Appointment System,"PHP, Laravel, MySQL, Bootstrap",https://github.com/yourusername/hospital-appointment-system,"Allows patients to find doctors, request appointments, and view schedules."
+House Price Prediction,"Python, NumPy, Pandas, Scikit-learn",https://github.com/yourusername/house-price-prediction,Trains regression models using property features and predicts estimated prices.
+Microservices Order Service,"Java, Spring Boot, Kafka, Docker",https://github.com/yourusername/microservices-order-service,"Processes order events asynchronously across order, payment, and notification services."
+Customer Churn Prediction,"Python, Pandas, XGBoost, Matplotlib",https://github.com/yourusername/customer-churn-prediction,Identifies customers at risk of leaving using historical usage and account attributes.
+Collaborative Whiteboard,"React, TypeScript, Socket.IO, Canvas API",https://github.com/yourusername/collaborative-whiteboard,"Enables users to draw, add notes, and collaborate on a shared canvas."
+Digital Notes Application,"Svelte, TypeScript, Firebase",https://github.com/yourusername/digital-notes-application,"Creates, edits, searches, and synchronizes notes with tags and cloud persistence."
+URL Monitoring Service,"Python, FastAPI, Celery, Redis",https://github.com/yourusername/url-monitoring-service,"Checks website availability, records response times, and sends outage notifications."
+Sentiment Analysis Tool,"Python, NLTK, Hugging Face Transformers",https://github.com/yourusername/sentiment-analysis-tool,"Classifies text sentiment and summarizes positive, neutral, and negative feedback."
+Vehicle Rental Platform,"Laravel, PHP, MySQL, JavaScript",https://github.com/yourusername/vehicle-rental-platform,"Supports vehicle listings, availability calendars, booking requests, and administration."
+Grocery Shopping App,"Flutter, Firebase, Dart",https://github.com/yourusername/grocery-shopping-app,"Provides grocery categories, product search, shopping carts, and delivery updates."
+API Rate Limiter,"Go, Redis, HTTP",https://github.com/yourusername/api-rate-limiter,Applies token-bucket rate limiting to API requests and returns usage-limit headers.
+Student Performance Predictor,"Python, Scikit-learn, Pandas, Streamlit",https://github.com/yourusername/student-performance-predictor,Explores academic indicators and predicts performance categories.
+Real-Time Stock Dashboard,"React, Node.js, WebSocket, Redis",https://github.com/yourusername/real-time-stock-dashboard,Streams market-price updates and displays watchlists and historical charts.
+Password Manager,"Python, PyQt, SQLite, Cryptography",https://github.com/yourusername/password-manager,Stores encrypted credentials locally and provides password generation and search.
+Restaurant Management System,"C#, .NET, SQL Server, WPF",https://github.com/yourusername/restaurant-management-system,"Manages menus, table orders, billing, kitchen status, and sales reports."
+Document OCR Pipeline,"Python, OpenCV, Tesseract, FastAPI",https://github.com/yourusername/document-ocr-pipeline,Extracts text from uploaded images and scanned documents.
+Log Analysis Dashboard,"Python, Elasticsearch, Kibana, Docker",https://github.com/yourusername/log-analysis-dashboard,Indexes application logs and visualizes errors and usage patterns.
+Travel Planner,"React, Node.js, PostgreSQL, Maps API",https://github.com/yourusername/travel-planner,"Organizes destinations, itineraries, saved places, and trip schedules."
+Blockchain Voting Demo,"Solidity, Ethereum, React, Hardhat",https://github.com/yourusername/blockchain-voting-demo,Demonstrates candidate registration and on-chain vote recording.
+IoT Temperature Monitor,"ESP32, MQTT, Python, InfluxDB, Grafana",https://github.com/yourusername/iot-temperature-monitor,"Collects sensor readings, stores time-series data, and visualizes temperature."
+Automated Test Suite,"Java, Selenium, TestNG, Maven",https://github.com/yourusername/automated-test-suite,Automates browser workflows and validates user-interface behavior.
+CI/CD Deployment Pipeline,"GitHub Actions, Docker, Kubernetes",https://github.com/yourusername/ci-cd-deployment-pipeline,Builds and tests containers and deploys applications through an automated pipeline.
+GraphQL Product API,"Node.js, Apollo Server, GraphQL, MongoDB",https://github.com/yourusername/graphql-product-api,Provides typed queries and mutations for product catalogs and wishlists.
+Email Campaign Manager,"Python, Django, Celery, Redis",https://github.com/yourusername/email-campaign-manager,"Schedules email campaigns, manages subscribers, and tracks engagement."
+Help Desk Portal,"React, Express, MongoDB, JWT",https://github.com/yourusername/help-desk-portal,"Lets users raise support tickets and agents assign, prioritize, and resolve them."
+Face Mask Detection,"Python, OpenCV, TensorFlow",https://github.com/yourusername/face-mask-detection,Uses image processing and a trained model to classify face-mask usage.
+Music Streaming Interface,"React, Redux, JavaScript, CSS",https://github.com/yourusername/music-streaming-interface,"Provides music browsing, playlists, playback controls, and responsive layouts."
+Payroll Processing System,"Java, Spring Boot, PostgreSQL",https://github.com/yourusername/payroll-processing-system,"Calculates salary components, deductions, payslips, and payroll summaries."
+Data Cleaning Toolkit,"Python, Pandas, NumPy",https://github.com/yourusername/data-cleaning-toolkit,"Cleans datasets by handling missing values, duplicates, inconsistent formats, and outliers."
+PDF Q&A Assistant,"Python, LangChain, ChromaDB, Streamlit, Groq",https://github.com/yourusername/pdf-q-a-assistant,Retrieves relevant document chunks from a vector database and uses an LLM to answer questions.
+Meeting Transcription Tool,"Python, Whisper, FastAPI, React",https://github.com/yourusername/meeting-transcription-tool,Transcribes meetings and presents searchable transcripts with timestamps.
+Product Review Summarizer,"Python, Hugging Face, FastAPI",https://github.com/yourusername/product-review-summarizer,Summarizes customer reviews and extracts recurring product strengths and complaints.
+Warehouse Tracking API,"Node.js, Express, PostgreSQL, Redis",https://github.com/yourusername/warehouse-tracking-api,"Tracks warehouse stock movements, shipments, and inventory adjustments."
+Expense Sharing App,"React Native, Firebase, JavaScript",https://github.com/yourusername/expense-sharing-app,"Splits group expenses, calculates balances, and records settlements."
+Online Quiz Platform,"Django, Python, PostgreSQL, Bootstrap",https://github.com/yourusername/online-quiz-platform,"Creates timed quizzes, evaluates answers, and reports learner scores."
+Server Health Monitor,"Go, Prometheus, Grafana, Docker",https://github.com/yourusername/server-health-monitor,"Collects CPU, memory, and service-health metrics and visualizes alerts."
+News Aggregator,"Python, BeautifulSoup, Flask, SQLite",https://github.com/yourusername/news-aggregator,Collects article metadata and organizes stories by topic and date.
+Social Media Analytics,"Python, Pandas, Plotly, Streamlit",https://github.com/yourusername/social-media-analytics,"Analyzes post engagement, audience growth, and content performance."
+Kotlin Notes App,"Kotlin, Jetpack Compose, Room",https://github.com/yourusername/kotlin-notes-app,"Provides offline note creation, editing, filtering, and local persistence."
+Vehicle Number Plate Reader,"Python, OpenCV, EasyOCR",https://github.com/yourusername/vehicle-number-plate-reader,Detects vehicle number plates in images and extracts their text.
+Graph Algorithm Visualizer,"JavaScript, React, D3.js",https://github.com/yourusername/graph-algorithm-visualizer,"Animates breadth-first search, depth-first search, shortest paths, and graph traversal."
+Secure Authentication API,"Node.js, Express, JWT, bcrypt, MongoDB",https://github.com/yourusername/secure-authentication-api,"Implements registration, login, password hashing, token authentication, and protected routes."
+Supply Chain Dashboard,"Power BI, SQL, Python",https://github.com/yourusername/supply-chain-dashboard,"Visualizes supplier performance, shipment delays, inventory turnover, and delivery trends."
+Cloud Serverless API,"AWS Lambda, API Gateway, DynamoDB, Python",https://github.com/yourusername/cloud-serverless-api,Runs event-driven endpoints and persists records in DynamoDB.
+Issue Tracker,"TypeScript, NestJS, PostgreSQL, React",https://github.com/yourusername/issue-tracker,"Tracks software defects, labels, assignments, comments, and release milestones."
+Online Auction Platform,"Ruby on Rails, Redis, PostgreSQL",https://github.com/yourusername/online-auction-platform,"Supports item listings, timed bidding, bid history, and auction completion."
+Crop Disease Classifier,"Python, TensorFlow, OpenCV, Flask",https://github.com/yourusername/crop-disease-classifier,Classifies crop-leaf images to identify common plant disease categories.
+Personal Finance Dashboard,"Next.js, TypeScript, Supabase, Recharts",https://github.com/yourusername/personal-finance-dashboard,"Displays budgets, transactions, savings goals, and monthly summaries."
+Containerized REST API,"Python, FastAPI, Docker, PostgreSQL",https://github.com/yourusername/containerized-rest-api,"Exposes CRUD endpoints, validates request data, and packages the service for deployment."
+Recommendation API,"Python, FastAPI, Scikit-learn, Redis",https://github.com/yourusername/recommendation-api,Serves item recommendations from a similarity model and caches frequent requests.
+Smart Home Controller,"ESP8266, Arduino, MQTT, Node.js",https://github.com/yourusername/smart-home-controller,Controls connected lights and sensors through a web interface and message broker.
+Sales Forecasting Model,"Python, Pandas, Prophet, Matplotlib",https://github.com/yourusername/sales-forecasting-model,Forecasts product sales from historical time-series data and visualizes expected trends.
+Kanban Board,"Vue.js, Pinia, Firebase",https://github.com/yourusername/kanban-board,Organizes work into boards and columns with draggable cards and due dates.
+Online Examination System,"Java, JSP, Servlets, MySQL",https://github.com/yourusername/online-examination-system,"Manages exam creation, timed assessments, and automatic objective scoring."
+Image Gallery API,"Node.js, Express, AWS S3, MongoDB",https://github.com/yourusername/image-gallery-api,"Stores image metadata, supports uploads, and provides paginated gallery endpoints."
+Text-to-Speech Reader,"Python, gTTS, Streamlit",https://github.com/yourusername/text-to-speech-reader,Converts user-provided text into downloadable speech audio.
+Kubernetes Deployment Demo,"Docker, Kubernetes, Helm, Nginx",https://github.com/yourusername/kubernetes-deployment-demo,Packages a web application and deploys configurable replicas with service routing.
+Customer Feedback Portal,"Angular, Firebase, TypeScript",https://github.com/yourusername/customer-feedback-portal,"Collects feedback forms, categorizes submissions, and displays administrative summaries."
+SQL Query Practice App,"React, Express, MySQL",https://github.com/yourusername/sql-query-practice-app,"Offers SQL exercises, executes practice queries, and displays result tables."
+Fraudulent URL Detector,"Python, Scikit-learn, Flask",https://github.com/yourusername/fraudulent-url-detector,Extracts URL features and classifies links as potentially malicious or benign.
+Book Recommendation API,"Python, Flask, Pandas, Scikit-learn",https://github.com/yourusername/book-recommendation-api,Suggests books based on preferences and similarities between book metadata.
+Collaborative Editor,"React, Yjs, WebSocket, Node.js",https://github.com/yourusername/collaborative-editor,Synchronizes text edits between collaborators and maintains shared document state.
+Retail POS System,"C#, .NET, SQLite, WPF",https://github.com/yourusername/retail-pos-system,"Processes checkout transactions, manages product catalogs, and generates receipts."
+Air Quality Dashboard,"JavaScript, React, REST API, Chart.js",https://github.com/yourusername/air-quality-dashboard,"Displays air-quality readings, pollutant levels, and location-based trends."
+Cloud Cost Analyzer,"Python, AWS Cost Explorer API, Pandas",https://github.com/yourusername/cloud-cost-analyzer,Processes cloud billing exports and highlights service-level spending patterns.
+Duplicate File Finder,"Python, hashlib, pathlib, Tkinter",https://github.com/yourusername/duplicate-file-finder,"Scans folders, calculates file hashes, and identifies duplicate files."
+Student Project Showcase,"React, Node.js, Express, MongoDB, Multer",https://github.com/yourusername/student-project-showcase,"Allows students to publish projects with descriptions, technologies, images, and external links."
+Cold Email Generator,"Python, Streamlit, LangChain, Groq, ChromaDB",https://github.com/yourusername/cold-email-generator,"Extracts job requirements, retrieves relevant portfolio projects using semantic search, and generates personalized outreach emails."
